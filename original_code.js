@@ -2,11 +2,15 @@ import promptSync from 'prompt-sync';
 import {displayMenu} from "./menu.js";
 const prompt = promptSync();
 
+// time: O(1)
+// space: O(1)
 export const riceCooker = {
   ricePresent: false,
   riceCooked: false,
   steamingInProgress: false,
   heatingInProgress: false,
+ 
+  // O(1)
   addRice() {
     if (!this.ricePresent) {
       this.ricePresent = true;
@@ -15,7 +19,8 @@ export const riceCooker = {
       console.log('There\'s already rice in the rice cooker.');
     }
   },
-  
+ 
+  // O(1)
   cookRice() {
     if (this.ricePresent && !this.riceCooked) {
       console.log('Cooking rice...');
@@ -28,8 +33,8 @@ export const riceCooker = {
       console.log('The rice is already cooked.');
     }
   },
-
-  
+ 
+  // O(1)
   steam() {
     if (this.ricePresent && !this.steamingInProgress) {
       console.log('Steaming in progress...');
@@ -43,8 +48,8 @@ export const riceCooker = {
       console.log('Steaming is already in progress.');
     }
   },
-
-  
+ 
+  // O(1)
   keepWarm() {
     if (this.ricePresent && this.riceCooked && !this.heatingInProgress) {
       console.log('The rice is now being kept warm.');
@@ -57,8 +62,8 @@ export const riceCooker = {
       console.log('Keeping warm is already in progress.');
     }
   },
-
-  
+ 
+  // O(1)
   removeRice() {
     if (this.ricePresent && (this.riceCooked || this.heatingInProgress)) {
       this.ricePresent = false;
@@ -70,8 +75,8 @@ export const riceCooker = {
       console.log('There\'s no rice to remove or it is not cooked yet.');
     }
   },
-
-  
+ 
+  // O(ms)
   delaySync(ms) { 
     const start = Date.now();
     while (Date.now() - start < ms) {
@@ -79,41 +84,41 @@ export const riceCooker = {
   },
 };
 
-
+// time = space = O(1)
 export function simulateRiceCooker() {
   let input;
-  const condition = true;
+  const condition = true; // 1
 
-  
-  while (condition) { 
-    displayMenu();
-    input = prompt('Enter your choice: ');
+  // Never ends, well, it would, but not properly:(
+  while (condition) { // O(1) because the number of operation doesn't depend on the size of input
+    displayMenu(); // 1
+    input = prompt('Enter your choice: '); // 1
 
-    if (input) {
-      const choice = parseInt(input);
+    if (input) { // 1
+      const choice = parseInt(input); // 1
 
-      if (!isNaN(choice)) { 
-        if (choice === 1) { 
-          riceCooker.addRice();
-        } else if (choice === 2) {
+      if (!isNaN(choice)) {  // 1
+        if (choice === 1) {  // 1
+          riceCooker.addRice(); // 1
+        } else if (choice === 2) { // 1
           riceCooker.cookRice();
-        } else if (choice === 3) {
+        } else if (choice === 3) { // 1
           riceCooker.steam();
-        } else if (choice === 4) {
+        } else if (choice === 4) { // 1
           riceCooker.keepWarm();
-        } else if (choice === 5) {
+        } else if (choice === 5) { // 1
           riceCooker.removeRice();
-        } else if (choice === 6) {
-          console.log('Thank you for using the Rice Cooker Simulator. Goodbye!');
+        } else if (choice === 6) { // 1
+          console.log('Thank you for using the Rice Cooker Simulator. Goodbye!'); // 1
           break;
-        } else {
-          console.log('Invalid choice. Please select a valid option.');
+        } else { // 1
+          console.log('Invalid choice. Please select a valid option.'); // 1
         }
       } else {
-        console.log('Invalid input. Please enter a valid number.');
+        console.log('Invalid input. Please enter a valid number.'); // 1
       }
     } else {
-      console.log('No input provided.');
+      console.log('No input provided.'); // 1
     }
   }
 }
